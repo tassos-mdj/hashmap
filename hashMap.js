@@ -41,10 +41,51 @@ export class HashMap {
             let bucket = new LinkedList;
             bucket.append({key, value});
             this.buckets[hashedKey] = bucket;
+            this.sizeHandler();
+            return;
         }
 
         if (this.buckets[hashedKey].key === key) {
                 this.buckets[hashedKey].value = value;
+            } else {
+                this.buckets[hashedKey].append({key, value});
+                this.sizeHandler();
             }
+    }
+
+    get(key) {
+        let result = null;
+        this.buckets.forEach((bucket) => {
+            if (bucket.head === null) {
+                return;
+            }
+
+            let curr = bucket.head;
+            while (curr) {
+                if (curr.data.key === key) {
+                    result = curr.data.value;
+                }
+                curr = curr.next;
+            }
+        })
+
+        return result;
+    }
+
+    has(key) {
+        return this.get(key) ? true : false;
+    }
+
+    remove(key) {
+        let result = false;
+        this.buckets.forEach((bucket) => {
+            let index =  bucket.findKey(key);
+            if (index !== null) {
+                bucket.removeAt(index);
+                result = true;
+            }
+        });
+
+        return result;
     }
 }

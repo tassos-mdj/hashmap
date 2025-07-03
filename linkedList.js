@@ -195,3 +195,19 @@ class Node {
     
 }
 
+LinkedList.prototype.findKey = function(key) {
+    if (this.head === null) {
+            return null;
+        }
+
+        let currentIndex = 0;
+        let curr = this.head;
+        while (curr) {
+            if (curr.data.key === key) {return currentIndex;}
+            curr = curr.next;
+            currentIndex++;
+        }
+
+        return null;
+}
+

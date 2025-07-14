@@ -8,7 +8,6 @@ map.set("Jane Doe", "CTO");
 
 console.log(map);
 
-console.log(map.remove("Jane doe"));
-console.log(map.remove("Jane Doe"));
+console.log(map.clear());
 
 console.log(map);

@@ -8,11 +8,7 @@ export class HashMap {
     }
 
     sizeHandler() {
-        let totalEntries = 0;
-        this.buckets.forEach((bucket) => {
-            totalEntries += bucket.size();
-        })
-        if (totalEntries > (this.loadFactor * this.capacity)) {
+        if (this.length() > (this.loadFactor * this.capacity)) {
             let newArray;
             this.capacity *= 2;
             this.buckets.forEach((bucket) => {
@@ -87,5 +83,26 @@ export class HashMap {
         });
 
         return result;
+    }
+
+    length() {
+        let totalEntries = 0;
+        this.buckets.forEach((bucket) => {
+            totalEntries += bucket.size();
+        })
+
+        return totalEntries;
+    }
+
+    clear() {
+        this.buckets.forEach((bucket) => {
+            while (bucket.getHead() !== null) {
+                bucket.pop();
+            }
+        })
+    }
+
+    keys() {
+        
     }
 }

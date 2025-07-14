@@ -103,6 +103,15 @@ export class HashMap {
     }
 
     keys() {
-        
+        let keysList = [];
+        this.buckets.forEach((bucket) => {
+            let curr = bucket.head;
+            while (curr) {
+                keysList.push(curr.data.key);
+                curr = curr.next;
+            }
+        })
+
+        return keysList;
     }
 }

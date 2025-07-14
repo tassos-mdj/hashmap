@@ -127,4 +127,17 @@ export class HashMap {
 
         return valuesList;
     }
+
+    entries() {
+        let pairs = [];
+        this.buckets.forEach((bucket) => {
+            let curr = bucket.head;
+            while (curr) {
+                pairs.push([curr.data.key, curr.data.value]);
+                curr = curr.next;
+            }
+        })
+
+        return pairs;
+    }
 }

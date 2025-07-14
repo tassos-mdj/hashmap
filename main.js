@@ -8,6 +8,4 @@ map.set("Jane Doe", "CTO");
 
 console.log(map);
 
-console.log(map.keys());
-console.log(map.values());
-
+console.log(map.entries());

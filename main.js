@@ -1,11 +1,25 @@
 import { HashMap } from "./hashMap.js";
 
-let map = new HashMap;
+const test = new HashMap;
 
-map.set("Tassos Kotidis", "Programmer");
-map.set("John Doe", "Accounting");
-map.set("Jane Doe", "CTO");
+test.set('apple', 'red');
+test.set('banana', 'yellow');
+test.set('carrot', 'orange');
+test.set('dog', 'brown');
+test.set('elephant', 'gray');
+test.set('frog', 'green');
+test.set('grape', 'purple');
+test.set('hat', 'black');
+test.set('ice cream', 'white');
+test.set('jacket', 'blue');
+test.set('kite', 'pink');
+test.set('lion', 'golden');
 
-console.log(map);
 
-console.log(map.entries());
+// test.set('moon', 'silver')
+
+console.log(test);
+
+
+
+

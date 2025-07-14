@@ -7,17 +7,7 @@ export class HashMap {
         this.buckets = [];
     }
 
-    sizeHandler() {
-        if (this.length() > (this.loadFactor * this.capacity)) {
-            let newArray;
-            this.capacity *= 2;
-            this.buckets.forEach((bucket) => {
-                newArray[this.hash(bucket.key)] = bucket;
-            })
-            this.buckets = newArray;
-            
-        }
-    }
+   
 
     hash(key) {
         let hashCode = 0;
@@ -33,6 +23,7 @@ export class HashMap {
 
     set(key, value) {
         const hashedKey = this.hash(key);
+
         if (!this.buckets[hashedKey]) {
             let bucket = new LinkedList;
             bucket.append({key, value});
@@ -41,8 +32,12 @@ export class HashMap {
             return;
         }
 
-        if (this.buckets[hashedKey].key === key) {
-                this.buckets[hashedKey].value = value;
+        let foundKeysIndex = null;
+        foundKeysIndex = this.buckets[hashedKey].findKey(key);
+        
+        if (foundKeysIndex !== null) {
+                this.buckets[hashedKey].insertAt({key, value}, foundKeysIndex + 1);
+                this.buckets[hashedKey].removeAt(foundKeysIndex);
             } else {
                 this.buckets[hashedKey].append({key, value});
                 this.sizeHandler();
@@ -139,5 +134,21 @@ export class HashMap {
         })
 
         return pairs;
+    }
+
+    sizeHandler() {
+        if (this.length() > (this.loadFactor * this.capacity)) {
+            let newArray = [];
+            this.capacity *= 2;
+            this.buckets.forEach((bucket) => {
+
+                let curr = bucket.head;
+                while (curr) {
+                    newArray[this.hash(curr.data.key)]
+                }
+            })
+            this.buckets = newArray;
+            
+        }
     }
 }

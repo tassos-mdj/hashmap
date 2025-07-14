@@ -78,7 +78,6 @@ export class LinkedList {
             }
         }
 
-        console.log('Not Found');
         return;
     }
 

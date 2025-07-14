@@ -5,9 +5,9 @@ export class HashMap {
         this.loadFactor = 0.8;
         this.capacity = 16;
         this.buckets = [];
+        this.loadLevel;
     }
 
-   
 
     hash(key) {
         let hashCode = 0;
@@ -76,7 +76,8 @@ export class HashMap {
                 result = true;
             }
         });
-
+        
+        this.updateLoadLevel();
         return result;
     }
 
@@ -95,6 +96,8 @@ export class HashMap {
                 bucket.pop();
             }
         })
+        this.updateLoadLevel();
+
     }
 
     keys() {
@@ -141,14 +144,25 @@ export class HashMap {
             let newArray = [];
             this.capacity *= 2;
             this.buckets.forEach((bucket) => {
-
+                let hashedKey;
                 let curr = bucket.head;
+                let newBucket = new LinkedList;
                 while (curr) {
-                    newArray[this.hash(curr.data.key)]
+                    hashedKey = this.hash(curr.data.key);
+                    const {key, value} = curr.data;
+                    newBucket.append({key, value});
+                    curr = curr.next;
                 }
+
+                newArray[hashedKey] = newBucket;
             })
             this.buckets = newArray;
             
         }
+        this.updateLoadLevel();
+    }
+
+    updateLoadLevel() {
+        this.loadLevel = this.length() / this.capacity;
     }
 }

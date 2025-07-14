@@ -114,4 +114,17 @@ export class HashMap {
 
         return keysList;
     }
+
+    values() {
+        let valuesList = [];
+        this.buckets.forEach((bucket) => {
+            let curr = bucket.head;
+            while (curr) {
+                valuesList.push(curr.data.value);
+                curr = curr.next;
+            }
+        })
+
+        return valuesList;
+    }
 }
